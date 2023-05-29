@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GameTest {
     Player player1;
@@ -16,6 +16,7 @@ public class GameTest {
         player1 = new Player(1, "valera", 15);
         player2 = new Player(2, "ultraKnightExtraKill", 10);
         player3 = new Player(3, "A fan of playing in a draw", 10);
+        player4 = new Player(3, "not null name", 10);
         source = new Game();
         source.register(player1);
         source.register(player2);
@@ -24,11 +25,11 @@ public class GameTest {
 
     @Test
     public void shouldRegister() {
-        ArrayList<Player> exp = new ArrayList<>();
-        exp.add(player1);
-        exp.add(player2);
-        exp.add(player3);
-        ArrayList<Player> act = source.getPlayers();
+        HashMap<String, Player> exp = new HashMap<>();
+        exp.put(player1.getName(), player1);
+        exp.put(player2.getName(), player2);
+        exp.put(player3.getName(), player3);
+        HashMap<String, Player> act = source.getPlayers();
 
         Assertions.assertEquals(exp, act);
     }
