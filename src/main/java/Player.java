@@ -13,4 +13,8 @@ public class Player {
     public int getStrength() {
         return strength;
     }
+
+    public String getName() {
+        return name;
+    }
 }
