@@ -37,7 +37,7 @@ public class GameTest {
     @Test
     public void shouldWinFirst() {
         int exp = 1;
-        int act = source.round(player1, player2);
+        int act = source.round(player1.getName(), player2.getName());
 
         Assertions.assertEquals(exp, act);
     }
@@ -45,7 +45,7 @@ public class GameTest {
     @Test
     public void shouldWinSecond() {
         int exp = 2;
-        int act = source.round(player2, player1);
+        int act = source.round(player2.getName(), player1.getName());
 
         Assertions.assertEquals(exp, act);
     }
@@ -53,7 +53,7 @@ public class GameTest {
     @Test
     public void shouldDraw() {
         int exp = 0;
-        int act = source.round(player2, player3);
+        int act = source.round(player2.getName(), player3.getName());
 
         Assertions.assertEquals(exp, act);
     }
@@ -63,18 +63,24 @@ public class GameTest {
         Player exceptionist = new Player(500, "Exception666", 100_000_000);
         ;
         Assertions.assertThrows(NotRegisteredException.class,
-                () -> source.round(player2, exceptionist));
+                () -> source.round(player2.getName(), exceptionist.getName()));
+    }
+
+    @Test
+    public void shouldThrowExceptionBecauseString() {
+        Assertions.assertThrows(NotRegisteredException.class,
+                () -> source.round(player2.getName(), "registeredUltraSilentAssassin1984"));
     }
 
     @Test
     public void onlyFirstRegisteredPlayer() {
         Assertions.assertThrows(NotRegisteredException.class,
-                () -> source.round(player2, player4));
+                () -> source.round(player2.getName(), player4.getName()));
     }
 
     @Test
     public void onlySecondRegisteredPlayer() {
         Assertions.assertThrows(NotRegisteredException.class,
-                () -> source.round(player4, player2));
+                () -> source.round(player4.getName(), player2.getName()));
     }
 }

@@ -1,18 +1,21 @@
 import java.util.HashMap;
 
 public class Game {
-    private static final HashMap<String, Player> players = new HashMap<>();
+    private final HashMap<String, Player> players = new HashMap<>();
 
     public void register(Player person) {
         players.put(person.getName(), person);
     }
 
-    public int round(Player person1, Player person2) {
-        if (players.containsKey(person1.getName())
-                && players.containsKey(person2.getName())) {
-            if (person1.getStrength() > person2.getStrength()) return 1;
-            else if (person2.getStrength() > person1.getStrength()) return 2;
-            else return 0;
+    public int round(String personName1, String personName2) {
+        if (players.containsKey(personName1) && players.containsKey(personName2)) {
+            if (players.get(personName1).getStrength() > players.get(personName2).getStrength()) {
+                return 1;
+            } else if (players.get(personName2).getStrength() > players.get(personName1).getStrength()) {
+                return 2;
+            } else {
+                return 0;
+            }
         } else {
             throw new NotRegisteredException();
         }
